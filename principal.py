@@ -2,18 +2,47 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 import requests
+from streamlit_option_menu import option_menu
+import Seguimiento #IMPORTANDO EL SEGUIMIENTO.PY PARA USAR SUS FUNCIONES
+import DashboardCRM #IMPORTANDO LA HOJA DE SAHBOARD CRM PARA USAR SUS FUNCIONES
+import os
+
+st.set_page_config(page_title="Aplicación Paceña", layout="wide", initial_sidebar_state="expanded")
+
 
 
 datos_map = pd.read_json("map.json")
 
 
+print("Archivos en pages/:", os.listdir("pages"))
+
+
+
+
 
 def main ():
-    
-   # url = "https://docs.google.com/spreadsheets/d/1USL95W4CYBvGOIpvBLlcO-3djRTRjJer2DbkCl48vpQ"
+
+    with st.sidebar:
+        selected = option_menu(
+            menu_title = "Menú Principal",
+            options = ["Cliente potencial","Seguimiento","Dashboard CRM"],
+        )
+
+    if selected == "Seguimiento":
+        Seguimiento.seguirCliente()
+    elif selected == "Cliente potencial":
+        PrincipalP()
+    elif selected == "Dashboard CRM":
+        DashboardCRM.Dashboard()
+
+
+
+def PrincipalP ():
+    # url = "https://docs.google.com/spreadsheets/d/1USL95W4CYBvGOIpvBLlcO-3djRTRjJer2DbkCl48vpQ"
     st.title ("APLICACIÓN PACEÑA")
     st.write("## Crear nuevo cliente potencial")
     conn = st.connection("gsheets", type=GSheetsConnection)
+
 
     #if st.button("Make API CALL"):
 
@@ -26,7 +55,11 @@ def main ():
     existing_data = conn.read(worksheet="CRM",usecols=list(range(11)),ttl=15)
     existing_data = existing_data.dropna(how="all")
 
+
+
     st.dataframe(existing_data)
+
+
 
     SEXO_i = [
 
@@ -77,7 +110,43 @@ def main ():
     #FORMULARIO
 
     with st.form(key="CRM_form"):
-        idI = st.text_input(label = "ID")
+
+
+        #PARA EDITAR UN CLIENTE ACTUAL
+
+        existing_data["TelefonoI"] = existing_data["TelefonoI"].apply(lambda x: str(int(float(x))) if pd.notnull(x) else "")
+
+
+        cliente_ids = st.selectbox("Distrito", options = existing_data["TelefonoI"].tolist(), index = None)
+
+
+        cliente_data = None
+        if cliente_ids and "form_initialized" not in st.session_state:
+            cliente_data = existing_data[existing_data["TelefonoI"] == cliente_ids].iloc[0]
+
+           # idI.value = cliente_data["ID"]
+           # "Nombre": Nombre,
+        
+            st.session_state.idI = cliente_data["ID"]
+            st.session_state.Nombre = cliente_data["Nombre"]
+            st.session_state.Sexo = cliente_data["Sexo"]
+            st.session_state.Departamento = cliente_data["Departamento"]
+            st.session_state.Provincia = cliente_data["Provincia"]
+            st.session_state.Distrito = cliente_data["Distrito"]
+            st.session_state.Telefono = cliente_data["TelefonoI"]
+            st.session_state.Tipo = cliente_data["Tipo"].split(", ")
+            st.session_state.Ocasion = cliente_data["Ocasión"]
+            st.session_state.Medio_Adqui = cliente_data["MedioAdquisicion"]
+            st.session_state.Campaña = cliente_data["Campaña"]
+            st.session_state.Fecha_Lead = pd.to_datetime(cliente_data["FechaLead"])
+            st.session_state.Fecha_UC = pd.to_datetime(cliente_data["FechaUltimoContacto"])
+            st.session_state.Estado = cliente_data["Estado"]
+            st.session_state.form_initialized = True
+
+
+
+
+        idI = st.text_input(label = "ID", value=st.session_state.get("idI", ""))
         Nombre = st.text_input(label = "Nombre")
         Sexo = st.selectbox("Sexo", options = SEXO_i, index = None)
         Departamento = st.selectbox("Departamento", options = datos_map.keys(), index=0)
@@ -157,7 +226,6 @@ def main ():
 #    # The message and nested widget will remain on the page
 #    st.write('Button clicked!')
 #    st.slider('Select a value')
-
 
 
 

@@ -109,8 +109,46 @@ def PrincipalP ():
     existing_data["TelefonoI"] = existing_data["TelefonoI"].apply(lambda x: str(int(float(x))) if pd.notnull(x) else "")
 
 
-    cliente_ids = st.selectbox("SELECCIÓN TELEFONO", options = existing_data["TelefonoI"].tolist(), index = None)
 
+
+    #PARA AÑADIR COLOR AL BOTON DE SELECCIONAR TELEFONO
+
+    st.markdown(
+
+        """
+        <style>
+            div[data-baseweb = "select"]{
+                background-color:#f7b260 ! important;
+                border-radius: 5px;
+                padding: 3px;
+            
+            }
+
+        </style>
+
+        <div id="telefono-box">
+
+        """,
+
+        unsafe_allow_html = True
+
+    )
+
+    with st.container():
+    # Usamos columnas para controlar el ancho
+        col1, col2, col3 = st.columns([1, 3, 1])  # Centramos
+
+        with col2:
+            st.markdown("""
+            <div style='background-color:#ff4d4d; padding: 5px; border-radius: 10px;'>
+                <label style='color:white; font-weight:bold; font-size:18px; '>EDITAR LEAD POR TELÉFONO</label>
+            """, unsafe_allow_html=True)
+
+            # Luego el selectbox normal (no estará *dentro* del div, pero estará justo debajo)
+
+            cliente_ids = st.selectbox("", options = existing_data["TelefonoI"].tolist(), index = None, key="telefono_select")
+    
+            st.markdown("</div>", unsafe_allow_html=True)
 
     #cliente_data = None
 

@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
-from streamlit_option_menu import option_menu
+##from streamlit_option_menu import option_menu
 import webbrowser as webbrowser
 import time, webbrowser, pyautogui
 from datetime import datetime

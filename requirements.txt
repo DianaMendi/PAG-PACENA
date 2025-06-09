@@ -4,3 +4,4 @@ st-option-menu
 pyautogui
 pywhatkit
 pandas
+matplotlib

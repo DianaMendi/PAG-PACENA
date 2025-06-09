@@ -1,10 +1,7 @@
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 from streamlit_option_menu import option_menu
-import webbrowser as webbrowser
-import time, webbrowser, pyautogui
 from datetime import datetime
-import pywhatkit
 import pandas as pd
 import matplotlib.pyplot as plt
 

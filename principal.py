@@ -5,7 +5,7 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 import requests
-##from streamlit_option_menu import option_menu
+from streamlit_option_menu import option_menu
 from datetime import datetime #PARA IMPORTA DEL DÍA FECHA
 
 import Seguimiento #IMPORTANDO EL SEGUIMIENTO.PY PARA USAR SUS FUNCIONES

@@ -1,6 +1,6 @@
 streamlit
 st-gsheets-connection
-st-option-menu
+streamlit-option-menu
 pyautogui
 pywhatkit
 pandas

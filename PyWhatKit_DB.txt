@@ -238,3 +238,38 @@ Time: 0:55
 Phone Number: +51960 621 504
 Message: Estimado cliente buenas tardes ...
 --------------------
+Date: 16/6/2025
+Time: 3:37
+Phone Number: +51993 715 918
+Message: Estimado cliente, buenas tardes...
+--------------------
+Date: 16/6/2025
+Time: 3:38
+Phone Number: +51964 800 761
+Message: Estimado cliente, buenas tardes...
+--------------------
+Date: 16/6/2025
+Time: 3:38
+Phone Number: +51959 574 385
+Message: Estimado cliente, buenas tardes...
+--------------------
+Date: 16/6/2025
+Time: 3:39
+Phone Number: +51948 214 978
+Message: Estimado cliente, buenas tardes...
+--------------------
+Date: 16/6/2025
+Time: 3:40
+Phone Number: +51910 181 125
+Message: Estimado cliente, buenas tardes...
+--------------------
+Date: 16/6/2025
+Time: 3:40
+Phone Number: +51980 707 211
+Message: Estimado cliente, buenas tardes...
+--------------------
+Date: 16/6/2025
+Time: 3:41
+Phone Number: +51959 736 719
+Message: Estimado cliente, buenas tardes...
+--------------------

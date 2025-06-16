@@ -1,9 +1,9 @@
 import requests
 
 def seguirCliente():
-
+    flag_open = st.checkbox("Enviar mensaje", value=False)
 # dentro del tab1:
-    if flag_open == True:
+    if flag_open:
         try:
             url = "https://bf40-2001-1388-53a0-25b6-1851-9e4e-f8b1-f8a3.ngrok-free.app/enviar"
             response = requests.post(url, json={

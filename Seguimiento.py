@@ -57,25 +57,50 @@ def seguirCliente():
                 st.error(f"❌ No se pudo conectar al servidor local: {e}")
 
     with tab2:
-        st.subheader("📋 Seguimiento de Clientes")
+        existing_data = conn.read(worksheet="SEGUIMIENTO", usecols=list(range(7)), ttl=7)
+        mensaje_data = conn.read(worksheet="MENSAJES", usecols=list(range(3)), ttl=3)
 
-        # Leer los datos actualizados
-        seguimiento_data = conn.read(worksheet="SEGUIMIENTO", usecols=list(range(7)), ttl=7)
-        seguimiento_data = seguimiento_data.dropna(how="all")  # eliminar filas vacías
+        existing_data = existing_data.dropna(how="all")
 
-        # Asegurar que los valores estén en formato adecuado
-        seguimiento_data["ID"] = seguimiento_data["ID"].astype(str)
-        seguimiento_data["Nombre"] = seguimiento_data["Nombre"].astype(str)
-        seguimiento_data["TelefonoI"] = seguimiento_data["TelefonoI"].astype(str)
+        Mensajes_Casual = dict(zip(
+            mensaje_data["Mensaje"].apply(lambda x: str(int(float(x))) if pd.notnull(x) else ""),
+            mensaje_data["Casual"]
+        ))
+        Mensajes_Negocio = dict(zip(
+            mensaje_data["Mensaje"].apply(lambda x: str(int(float(x))) if pd.notnull(x) else ""),
+            mensaje_data["Negocio"]
+        ))
 
-        # Filtrar por Ocasión
-        ocasiones = seguimiento_data["Ocasión"].dropna().unique().tolist()
-        filtro_ocasion = st.selectbox("Filtrar por ocasión", ["Todos"] + ocasiones)
+        Telefonos = list(existing_data["TelefonoI"].dropna().apply(lambda x: str(int(float(x))) if pd.notnull(x) else ""))
+        Tipo_Ocasion = list(existing_data["Ocasión"].dropna())
+        NumDiasClientes = list(existing_data["Días"].dropna())
 
-        if filtro_ocasion != "Todos":
-            datos_filtrados = seguimiento_data[seguimiento_data["Ocasión"] == filtro_ocasion]
-        else:
-            datos_filtrados = seguimiento_data
+        wait_time = 30
 
-        st.dataframe(datos_filtrados.reset_index(drop=True), use_container_width=True)
+        with st.expander("📤 Enviar seguimiento por días y ocasión"):
+            text_msg = st.text_area("Mensaje base", "Hola, te recordamos nuestras ofertas esta semana")
+            flag_open = st.checkbox("✅ Enviar Seguimiento", value=False)
 
+            if flag_open:
+                for i in range(len(Telefonos)):
+                    try:
+                        dias = int(NumDiasClientes[i])
+                        tipo = Tipo_Ocasion[i]
+
+                        if tipo == "Casual / Evento":
+                            mensaje = Mensajes_Casual.get(str(dias), text_msg)
+                        else:
+                            mensaje = Mensajes_Negocio.get(str(dias), text_msg)
+
+                        response = requests.post("https://<TU_URL_NGROK>/enviar", json={
+                            "numeros": [Telefonos[i]],
+                            "mensaje": mensaje,
+                            "wait_time": wait_time
+                        })
+
+                        if response.status_code == 200:
+                            st.success(f"Mensaje enviado a {Telefonos[i]}")
+                        else:
+                            st.error(f"❌ Error {response.status_code}: {response.text}")
+                    except Exception as e:
+                        st.error(f"❌ Error con {Telefonos[i]}: {e}")

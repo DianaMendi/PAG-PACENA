@@ -86,20 +86,22 @@ def seguirCliente():
                         dias = int(NumDiasClientes[i])
                         tipo = Tipo_Ocasion[i]
 
-                        if tipo == "Casual / Evento":
-                            mensaje = Mensajes_Casual.get(str(dias), text_msg)
-                        else:
-                            mensaje = Mensajes_Negocio.get(str(dias), text_msg)
+                        if dias <= 5:
+                            if tipo == "Casual / Evento":
+                                mensaje = Mensajes_Casual.get(str(dias), text_msg)
+                            else:
+                                mensaje = Mensajes_Negocio.get(str(dias), text_msg)
+                        
 
-                        response = requests.post("https://930d-2001-1388-53a0-25b6-1851-9e4e-f8b1-f8a3.ngrok-free.app/enviar", json={
-                            "numeros": [Telefonos[i]],
-                            "mensaje": mensaje,
-                            "wait_time": wait_time
-                        })
+                            response = requests.post("https://930d-2001-1388-53a0-25b6-1851-9e4e-f8b1-f8a3.ngrok-free.app/enviar", json={
+                                "numeros": [Telefonos[i]],
+                                "mensaje": mensaje,
+                                "wait_time": wait_time
+                            })
 
-                        if response.status_code == 200:
-                            st.success(f"Mensaje enviado a {Telefonos[i]}")
-                        else:
-                            st.error(f"❌ Error {response.status_code}: {response.text}")
+                            if response.status_code == 200:
+                                st.success(f"Mensaje enviado a {Telefonos[i]}")
+                            else:
+                                st.error(f"❌ Error {response.status_code}: {response.text}")
                     except Exception as e:
                         st.error(f"❌ Error con {Telefonos[i]}: {e}")

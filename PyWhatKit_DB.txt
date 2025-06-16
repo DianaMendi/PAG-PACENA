@@ -283,3 +283,13 @@ Time: 7:53
 Phone Number: +51960621504
 Message: Hola, te recordamos nuestras ofertas esta semana
 --------------------
+Date: 16/6/2025
+Time: 7:58
+Phone Number: +51960621504
+Message: Estimado cliente, buenas tardes...
+--------------------
+Date: 16/6/2025
+Time: 7:58
+Phone Number: +51960621504
+Message: Estimado cliente, buenas tardes...
+--------------------

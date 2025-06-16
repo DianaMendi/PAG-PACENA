@@ -41,7 +41,7 @@ def seguirCliente():
 
         if flag_open:
             try:
-                url = "https://defd-2001-1388-53a0-25b6-1851-9e4e-f8b1-f8a3.ngrok-free.app/enviar"  # <- REEMPLAZA con tu URL ngrok activa
+                url = "https://d414-2001-1388-53a0-25b6-1851-9e4e-f8b1-f8a3.ngrok-free.app/enviar"  # <- REEMPLAZA con tu URL ngrok activa
                 response = requests.post(url, json={
                     "numeros": numeros_antiguos,
                     "mensaje": text_msg,
@@ -92,7 +92,7 @@ def seguirCliente():
                         else:
                             mensaje = Mensajes_Negocio.get(str(dias), text_msg)
 
-                        response = requests.post("https://<TU_URL_NGROK>/enviar", json={
+                        response = requests.post("https://d414-2001-1388-53a0-25b6-1851-9e4e-f8b1-f8a3.ngrok-free.app/enviar", json={
                             "numeros": [Telefonos[i]],
                             "mensaje": mensaje,
                             "wait_time": wait_time

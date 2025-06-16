@@ -57,15 +57,25 @@ def seguirCliente():
                 st.error(f"❌ No se pudo conectar al servidor local: {e}")
 
     with tab2:
-        st.subheader("📊 Seguimiento de clientes")
+        st.subheader("📋 Seguimiento de Clientes")
 
-        # Usamos la columna "Ocasión" en lugar de "Estado"
-        estados = seguimiento_data["Ocasión"].dropna().unique().tolist()
-        estado_seleccionado = st.selectbox("Filtrar por ocasión", ["Todos"] + estados)
+        # Leer los datos actualizados
+        seguimiento_data = conn.read(worksheet="SEGUIMIENTO", usecols=list(range(7)), ttl=7)
+        seguimiento_data = seguimiento_data.dropna(how="all")  # eliminar filas vacías
 
-        if estado_seleccionado != "Todos":
-            filtro = seguimiento_data[seguimiento_data["Ocasión"] == estado_seleccionado]
+        # Asegurar que los valores estén en formato adecuado
+        seguimiento_data["ID"] = seguimiento_data["ID"].astype(str)
+        seguimiento_data["Nombre"] = seguimiento_data["Nombre"].astype(str)
+        seguimiento_data["TelefonoI"] = seguimiento_data["TelefonoI"].astype(str)
+
+        # Filtrar por Ocasión
+        ocasiones = seguimiento_data["Ocasión"].dropna().unique().tolist()
+        filtro_ocasion = st.selectbox("Filtrar por ocasión", ["Todos"] + ocasiones)
+
+        if filtro_ocasion != "Todos":
+            datos_filtrados = seguimiento_data[seguimiento_data["Ocasión"] == filtro_ocasion]
         else:
-            filtro = seguimiento_data
+            datos_filtrados = seguimiento_data
 
-        st.dataframe(filtro.reset_index(drop=True))
+        st.dataframe(datos_filtrados.reset_index(drop=True), use_container_width=True)
+

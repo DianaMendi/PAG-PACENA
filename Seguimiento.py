@@ -34,7 +34,7 @@ def seguirCliente():
     wait_time = 30
     text_msg = st.text_area("Mensaje a enviar", value="Estimado cliente, buenas tardes...")
 
-    tab1, tab2, tab3 = st.tabs(["Enviar ahora", "Programar envío", "Enviar seguimiento"])
+    tab1, tab2, tab3 = st.tabs(["Enviar ahora", "Seguimiento Clientes"])
 
     with tab1:
         flag_open = st.checkbox("Enviar mensaje", value=False)

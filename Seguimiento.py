@@ -1,23 +1,22 @@
-import streamlit as st
 import requests
 
+def seguirCliente(){
 
-def seguirCliente() {
-    numero = st.text_input("Número")
-    mensaje = st.text_area("Mensaje")
-    hora = st.number_input("Hora", 0, 23)
-    minuto = st.number_input("Minuto", 0, 59)
+# dentro del tab1:
+    if flag_open == True:
+        try:
+            url = "https://bf40-2001-1388-53a0-25b6-1851-9e4e-f8b1-f8a3.ngrok-free.app/enviar"
+            response = requests.post(url, json={
+                "numeros": numeros_antiguos,
+                "mensaje": text_msg,
+                "wait_time": wait_time
+            })
 
-    if st.button("Enviar"):
-        data = {
-            "numero": numero,
-            "mensaje": mensaje,
-            "hora": hora,
-            "minuto": minuto
-        }
-        r = requests.post("https://1234abcd.ngrok.io/enviar", json=data)
-        if r.status_code == 200:
-            st.success("Mensaje enviado desde tu PC")
-        else:
-            st.error("Error al enviar")
+            if response.status_code == 200:
+                st.success("Mensajes enviados desde tu PC")
+            else:
+                st.error(f"Error: {response.text}")
+
+        except Exception as e:
+            st.error(f"No se pudo conectar al servidor local: {e}")
 }

@@ -1,4 +1,5 @@
 import requests
+import streamlit as st
 
 def seguirCliente():
     flag_open = st.checkbox("Enviar mensaje", value=False)

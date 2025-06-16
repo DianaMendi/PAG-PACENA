@@ -1,6 +1,6 @@
 import requests
 
-def seguirCliente(){
+def seguirCliente():
 
 # dentro del tab1:
     if flag_open == True:
@@ -19,4 +19,3 @@ def seguirCliente(){
 
         except Exception as e:
             st.error(f"No se pudo conectar al servidor local: {e}")
-}

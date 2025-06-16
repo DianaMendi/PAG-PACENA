@@ -65,6 +65,8 @@ def seguirCliente():
         st.dataframe(seguimiento_data, use_container_width=True)
 
         # Filtro por estado o nombre
+        st.write(seguimiento_data.columns.tolist())
+
         estados = seguimiento_data["Estado"].unique().tolist()
         estado_seleccionado = st.selectbox("Filtrar por estado:", ["Todos"] + estados)
 

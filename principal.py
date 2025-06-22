@@ -173,6 +173,9 @@ def PrincipalP ():
 
     #st.write("## Crear nuevo cliente potencial")
 
+
+
+
     st.markdown("""
         <div style='background-color:#f7b260; padding: 5px; border-radius: 10px; text-align: center'>
         <label style='color:black; font-weight:bold; font-size:18px; '>AGREGAR NUEVO CLIENTE</label>
@@ -297,6 +300,10 @@ def PrincipalP ():
 
                 st.success("Cliente potencial añadido")
 
+    with st.expander("📦 Datos adicionales"):
+        direccion = st.text_input("Dirección de entrega")
+        referencia = st.text_input("Referencia")
+        hora_entrega = st.time_input("Hora de entrega")
 
     if st.session_state.get("cliente_existente", False):
 

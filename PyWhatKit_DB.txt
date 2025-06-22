@@ -293,3 +293,18 @@ Time: 7:58
 Phone Number: +51960621504
 Message: Estimado cliente, buenas tardes...
 --------------------
+Date: 16/6/2025
+Time: 8:6
+Phone Number: +51960621504
+Message: Ubicanos en nuestras redes sociales, taller, etc, PARA DEGUSTACIÓN
+--------------------
+Date: 16/6/2025
+Time: 8:11
+Phone Number: +51960621504
+Message: Ubicanos en nuestras redes sociales, taller, etc, PARA DEGUSTACIÓN
+--------------------
+Date: 16/6/2025
+Time: 10:31
+Phone Number: +51960621504
+Message: Ubicanos en nuestras redes sociales, taller, etc, PARA DEGUSTACIÓN
+--------------------

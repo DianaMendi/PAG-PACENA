@@ -124,6 +124,19 @@ def PrincipalP ():
     ]
 
 
+    PRECIO_i = [
+
+        "2",
+        "2,40",
+        "2,45",
+        "2,5",
+        "2,8",
+        "3",
+        "4",
+
+    ]
+
+
     existing_data["TelefonoI"] = existing_data["TelefonoI"].apply(lambda x: str(int(float(x))) if pd.notnull(x) else "")
 
     
@@ -210,7 +223,8 @@ def PrincipalP ():
         st.session_state.Fecha_UC = pd.to_datetime(cliente_data["FechaUltimoContacto"])
         st.session_state.Estado = cliente_data["Estado"]
         st.session_state.Comentario = cliente_data["Comentario"] if pd.notna(cliente_data["Comentario"]) else ""
-
+    
+    
     fecha_str = datetime.now().date() ##PARA TENER LA FECHA ACTUAL EN CASO NO SE COLOQUE EN EL INPUT DE FECHA LEAD
     
     #FORMULARIO
@@ -241,7 +255,9 @@ def PrincipalP ():
         with st.expander("📦 Datos adicionales"):
             direccion = st.text_input("Dirección de entrega")
             referencia = st.text_input("Referencia")
-            hora_entrega = st.time_input("Hora de entrega")
+            hora_entrega = st.text_input("Hora de entrega")
+            delivery = st.text_input("Delivery")
+            precio = st.text_input("Delivery")
 
         st.markdown("**Campo requerido*")
 

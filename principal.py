@@ -237,6 +237,12 @@ def PrincipalP ():
         Comentario = st.text_area(label = "Comentario", value=st.session_state.get("Comentario", ""))
 
 
+            
+        with st.expander("📦 Datos adicionales"):
+            direccion = st.text_input("Dirección de entrega")
+            referencia = st.text_input("Referencia")
+            hora_entrega = st.time_input("Hora de entrega")
+
         st.markdown("**Campo requerido*")
 
         submit_button = st.form_submit_button(label = "Añadir Cliente potencial")
@@ -300,10 +306,7 @@ def PrincipalP ():
 
                 st.success("Cliente potencial añadido")
 
-    with st.expander("📦 Datos adicionales"):
-        direccion = st.text_input("Dirección de entrega")
-        referencia = st.text_input("Referencia")
-        hora_entrega = st.time_input("Hora de entrega")
+
 
     if st.session_state.get("cliente_existente", False):
 

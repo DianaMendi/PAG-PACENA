@@ -65,7 +65,7 @@ def PrincipalP ():
        #     existing_data = response
 
 
-    existing_data = conn.read(worksheet="CRM",usecols=list(range(15)),ttl=15)
+    existing_data = conn.read(worksheet="CRM",usecols=list(range(20)),ttl=20)
     #AMPLIAREMOS EL NUM DE COLUMNAS PARA QUE TMB RECONOZACA LAS FECHAS, ESTADO
 
 
@@ -223,7 +223,11 @@ def PrincipalP ():
         st.session_state.Fecha_UC = pd.to_datetime(cliente_data["FechaUltimoContacto"])
         st.session_state.Estado = cliente_data["Estado"]
         st.session_state.Comentario = cliente_data["Comentario"] if pd.notna(cliente_data["Comentario"]) else ""
-    
+        st.session_state.Direccion = cliente_data["DIRECCION"]
+        st.session_state.Referencia = cliente_data["REFERENCIA"]
+        st.session_state.H_entrega = cliente_data["HORA_ENTREGA"]
+        st.session_state.Delivery = cliente_data["DELIVERY"]
+        st.session_state.Precio = cliente_data["PRECIO"]
     
     fecha_str = datetime.now().date() ##PARA TENER LA FECHA ACTUAL EN CASO NO SE COLOQUE EN EL INPUT DE FECHA LEAD
     
@@ -253,16 +257,17 @@ def PrincipalP ():
 
             
         with st.expander("📦 Datos adicionales"):
-            direccion = st.text_input("Dirección de entrega")
-            referencia = st.text_input("Referencia")
-            hora_entrega = st.text_input("Hora de entrega")
-            delivery = st.text_input("Delivery")
-            precio = st.text_input("Delivery")
+            direccion = st.text_input(label = "DIRECCION", value=st.session_state.get("DIRECCION", ""))
+            referencia = st.text_input(label = "REFERENCIA",value=st.session_state.get("REFERENCIA", ""))
+            hora_entrega = st.text_input(label = "HORA_ENTREGA",value=st.session_state.get("HORA_ENTREGA", ""))
+            delivery = st.text_input(label = "DELIVERY",value=st.session_state.get("DELIVERY", ""))
+            precio = st.text_input(label = "Precio",value=st.session_state.get("Precio", ""))
 
         st.markdown("**Campo requerido*")
 
         submit_button = st.form_submit_button(label = "Añadir Cliente potencial")
         existing_data["TelefonoI"] = existing_data["TelefonoI"].astype(str) #PARA CONVERTIR EL EXISTING DATA TELEFONO, PARA CAMBIAR ESA PARTE DEL DATAFRAME SU TIPO
+        #j
         
         if submit_button:
             if not Tipo or not  Ocasion  or not Medio_Adqui or not Estado or not Telefono:
@@ -291,7 +296,13 @@ def PrincipalP ():
                             # O un valor por defecto como "" )
                         ##ESO ES PARA QUE SI NO HAYA FECHA ULTIMO CONTACTO SE AGREGUE LA FECHALEAD PARA QUE NO HAYA ERROR
                         "Estado": Estado,
-                        "Comentario": Comentario
+                        "Comentario": Comentario,
+                        "DIRECCION": direccion,
+                        "REFERENCIA": referencia,
+                        "HORA_ENTREGA": hora_entrega,
+                        "DELIVERY": delivery,
+                        "Precio": precio,
+
                     }
             else:
 
@@ -312,6 +323,11 @@ def PrincipalP ():
                             "FechaLead": fecha_str.strftime("%Y-%m-%d") if Fecha_Lead is None else Fecha_Lead.strftime("%Y-%m-%d"),
                             "FechaUltimoContacto": fecha_str.strftime("%Y-%m-%d") if Fecha_Lead is None else Fecha_Lead.strftime("%Y-%m-%d") if Fecha_UC is None  else Fecha_UC.strftime("%Y-%m-%d"),
                             "Estado": Estado,
+                            "DIRECCION": direccion,
+                            "REFERENCIA": referencia,
+                            "HORA_ENTREGA": hora_entrega,
+                            "DELIVERY": delivery,
+                            "Precio": precio,
                         }
                     ]
                 )

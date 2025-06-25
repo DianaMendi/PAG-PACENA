@@ -257,11 +257,11 @@ def PrincipalP ():
 
             
         with st.expander("📦 Datos adicionales"):
-            direccion = st.text_input(label = "DIRECCION", value=st.session_state.get("DIRECCION", ""))
-            referencia = st.text_input(label = "REFERENCIA",value=st.session_state.get("REFERENCIA", ""))
-            hora_entrega = st.text_input(label = "HORA_ENTREGA",value=st.session_state.get("HORA_ENTREGA", ""))
-            delivery = st.text_input(label = "DELIVERY",value=st.session_state.get("DELIVERY", ""))
-            precio = st.text_input(label = "Precio",value=st.session_state.get("Precio", ""))
+            Direccion = st.text_input(label = "DIRECCION", value=st.session_state.get("DIRECCION", ""))
+            Referencia = st.text_input(label = "REFERENCIA",value=st.session_state.get("REFERENCIA", ""))
+            H_entrega = st.text_input(label = "HORA_ENTREGA",value=st.session_state.get("HORA_ENTREGA", ""))
+            Delivery = st.text_input(label = "DELIVERY",value=st.session_state.get("DELIVERY", ""))
+            Precio = st.text_input(label = "Precio",value=st.session_state.get("Precio", ""))
 
         st.markdown("**Campo requerido*")
 
@@ -297,11 +297,11 @@ def PrincipalP ():
                         ##ESO ES PARA QUE SI NO HAYA FECHA ULTIMO CONTACTO SE AGREGUE LA FECHALEAD PARA QUE NO HAYA ERROR
                         "Estado": Estado,
                         "Comentario": Comentario,
-                        "DIRECCION": direccion,
-                        "REFERENCIA": referencia,
-                        "HORA_ENTREGA": hora_entrega,
-                        "DELIVERY": delivery,
-                        "Precio": precio,
+                        "DIRECCION": Direccion,
+                        "REFERENCIA": Referencia,
+                        "HORA_ENTREGA": H_entrega,
+                        "DELIVERY": Delivery,
+                        "Precio": Precio,
 
                     }
             else:
@@ -323,11 +323,11 @@ def PrincipalP ():
                             "FechaLead": fecha_str.strftime("%Y-%m-%d") if Fecha_Lead is None else Fecha_Lead.strftime("%Y-%m-%d"),
                             "FechaUltimoContacto": fecha_str.strftime("%Y-%m-%d") if Fecha_Lead is None else Fecha_Lead.strftime("%Y-%m-%d") if Fecha_UC is None  else Fecha_UC.strftime("%Y-%m-%d"),
                             "Estado": Estado,
-                            "DIRECCION": direccion,
-                            "REFERENCIA": referencia,
-                            "HORA_ENTREGA": hora_entrega,
-                            "DELIVERY": delivery,
-                            "Precio": precio,
+                            "DIRECCION": Direccion,
+                            "REFERENCIA": Referencia,
+                            "HORA_ENTREGA": H_entrega,
+                            "DELIVERY": Delivery,
+                            "Precio": Precio,
                         }
                     ]
                 )

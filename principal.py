@@ -227,7 +227,7 @@ def PrincipalP ():
         st.session_state.Referencia = cliente_data["REFERENCIA"]
         st.session_state.H_entrega = cliente_data["HORA_ENTREGA"]
         st.session_state.Delivery = cliente_data["DELIVERY"]
-        st.session_state.Precio = cliente_data["PRECIO"]
+        st.session_state.Precio = cliente_data["Precio"]
     
     fecha_str = datetime.now().date() ##PARA TENER LA FECHA ACTUAL EN CASO NO SE COLOQUE EN EL INPUT DE FECHA LEAD
     

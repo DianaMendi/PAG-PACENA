@@ -257,10 +257,10 @@ def PrincipalP ():
 
             
         with st.expander("📦 Datos adicionales"):
-            Direccion = st.text_input(label = "DIRECCION", value=st.session_state.get("DIRECCION", ""))
-            Referencia = st.text_input(label = "REFERENCIA",value=st.session_state.get("REFERENCIA", ""))
-            H_entrega = st.text_input(label = "HORA_ENTREGA",value=st.session_state.get("HORA_ENTREGA", ""))
-            Delivery = st.text_input(label = "DELIVERY",value=st.session_state.get("DELIVERY", ""))
+            Direccion = st.text_input(label = "DIRECCION", value=st.session_state.get("Direccion", ""))
+            Referencia = st.text_input(label = "REFERENCIA",value=st.session_state.get("Referencia", ""))
+            H_entrega = st.text_input(label = "HORA_ENTREGA",value=st.session_state.get("H_entrega", ""))
+            Delivery = st.text_input(label = "DELIVERY",value=st.session_state.get("Delivery", ""))
             Precio = st.text_input(label = "Precio",value=st.session_state.get("Precio", ""))
 
         st.markdown("**Campo requerido*")

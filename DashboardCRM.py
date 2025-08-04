@@ -23,6 +23,7 @@ def Dashboard():
     estado = existing_data["Estado"].dropna(how="all")
     mes = existing_data["FechaLead"].dropna(how="all")
     sexo = existing_data["Sexo"].dropna(how="all")
+    ocasion = existing_data["Ocasión"].dropna(how="all")
 
     existing_data["FechaLead"] = pd.to_datetime(existing_data["FechaLead"], errors="coerce")
 
@@ -31,7 +32,7 @@ def Dashboard():
 
 
 
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4 , col 5 = st.columns(5)
 
 
     # Crear columnas para poner los filtros en fila
@@ -58,6 +59,14 @@ def Dashboard():
             "Mes:",
             options=existing_data["MesNombre"].dropna().unique()
         )
+
+    with col5:
+        filtro_ocasion = st.multiselect(
+            "Mes:",
+            options=existing_data["Ocasión"].dropna().unique()
+        )
+
+
 
     # Aplicar filtros
     df_filtrado = existing_data.copy()

@@ -100,15 +100,18 @@ def Dashboard():
     #df_mes_estado = df_mes_estado.reindex(orden_meses)
 
     st.bar_chart(df_mes_estado)
+    st.write("Total 120 clientes nuevos mes de Julio")
 
     # -------------------------------
     # 📊 Gráfico 2: Medio de Adquisición por número de leads
     # -------------------------------
-    st.markdown("## 🧭 Medio de Adquisición por Número de Leads")
+    st.markdown("## 🧭 Medio de Adquisición de los clientes")
 
     df_obtencion = df_filtrado["MedioAdquisicion"].value_counts().sort_values(ascending=True)
 
     st.bar_chart(df_obtencion)
+
+    st.write("La publicidad de facebook trajo 82 clientes nuevos entre negocio y bocaditos")
 
 
     st.markdown("## 🧭 Clientes por ocasión")
@@ -116,6 +119,8 @@ def Dashboard():
     df_ocasion = df_filtrado["Ocasión"].value_counts().sort_values(ascending=True)
 
     st.bar_chart(df_ocasion)
+
+    st.write("De los nuevos clientes de Julio 100 son de bocaditos y 20 de Negocio")
 
 
     ##MES POR ESTADO

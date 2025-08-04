@@ -111,7 +111,7 @@ def Dashboard():
 
     st.bar_chart(df_obtencion)
 
-    st.write("La publicidad de facebook trajo 82 clientes nuevos entre negocio y bocaditos")
+    st.write("La publicidad de facebook trajo 82 clientes nuevos entre negocio y bocaditos, Asimismo la página misma de Facebook unos 23 clientes")
 
 
     st.markdown("## 🧭 Clientes por ocasión")

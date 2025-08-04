@@ -62,7 +62,7 @@ def Dashboard():
 
     with col5:
         filtro_ocasion = st.multiselect(
-            "Ocasion":",
+            "Ocasion:",
             options=existing_data["Ocasión"].dropna().unique()
         )
 

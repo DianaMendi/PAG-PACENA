@@ -120,7 +120,7 @@ def Dashboard():
 
     st.bar_chart(df_ocasion)
 
-    st.write("De los nuevos clientes de Julio 100 son de bocaditos y 20 de Negocio")
+    st.write("De los nuevos clientes de Julio 100 son casual / evento y 20 de Negocio")
 
 
     ##MES POR ESTADO

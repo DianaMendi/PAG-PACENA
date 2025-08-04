@@ -62,7 +62,7 @@ def Dashboard():
 
     with col5:
         filtro_ocasion = st.multiselect(
-            "Mes:",
+            "Ocasion":",
             options=existing_data["Ocasión"].dropna().unique()
         )
 
@@ -82,6 +82,9 @@ def Dashboard():
 
     if filtro_mes:
         df_filtrado = df_filtrado[df_filtrado["MesNombre"].isin(filtro_mes)]
+
+    if filtro_ocasion:
+        df_filtrado = df_filtrado[df_filtrado["Ocasión"].isin(filtro_ocasion)]
 
     # -------------------------------
     # 📊 Gráfico 1: Leads y Clientes por Mes
@@ -106,6 +109,13 @@ def Dashboard():
     df_obtencion = df_filtrado["MedioAdquisicion"].value_counts().sort_values(ascending=True)
 
     st.bar_chart(df_obtencion)
+
+
+    st.markdown("## 🧭 Clientes por ocasión")
+
+    df_ocasion = df_filtrado["Ocasión"].value_counts().sort_values(ascending=True)
+
+    st.bar_chart(df_ocasion)
 
 
     ##MES POR ESTADO
